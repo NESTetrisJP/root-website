@@ -9,3 +9,5 @@ public/
 build/
 .idea/
 source/images/apng/
+imgsrc/*.png
+imgsrc/*.gif

@@ -79,7 +79,7 @@ function emptyField(width, height) {
 }
 
 export class ComponentField extends Component {
-  constructor(border, background) {
+  constructor(border, background, rotationSystem) {
     super()
     this.border = border
     this.background = background
@@ -88,7 +88,7 @@ export class ComponentField extends Component {
     this.currentMino = null
     this.currentMinoPos = null
     this.currentMinoRot = null
-    this.rotationSystem = null
+    this.rotationSystem = rotationSystem
     this.backgroundFieldBrightness = 0.5
   }
   async init() {
@@ -105,19 +105,22 @@ export class ComponentField extends Component {
     this.background.render(ctx)
 
     this.renderField(ctx, this.backgroundField, this.backgroundFieldBrightness)
+    this.renderField(ctx, this.foregroundField, 1)
 
-    const currentMinoCoords = Tetris.getRotatedCoords(Tetris.minoList[this.currentMino.id], this.currentMinoRot)
-    for (let i = 0; i < 4; i++) {
-      const [ox, oy] = this.currentMinoPos
-      const [dx, dy] = currentMinoCoords[i]
-      const x = ox + dx
-      const y = oy + dy
-      if (x < 0 || x >= 10 || y < 0 || y >= 20) continue
-      const block = this.currentMino.blocks[i]
-      ctx.save()
-      ctx.translate(x * 12, (19 - y) * 12)
-      block.render(ctx)
-      ctx.restore()
+    if (this.currentMino != null) {
+      const currentMinoCoords = Tetris.getRotatedCoords(Tetris.minoList[this.currentMino.id], this.currentMinoRot)
+      for (let i = 0; i < 4; i++) {
+        const [ox, oy] = this.currentMinoPos
+        const [dx, dy] = currentMinoCoords[i]
+        const x = ox + dx
+        const y = oy + dy
+        if (x < 0 || x >= 10 || y < 0 || y >= 20) continue
+        const block = this.currentMino.blocks[i]
+        ctx.save()
+        ctx.translate(x * 12, (19 - y) * 12)
+        block.render(ctx)
+        ctx.restore()
+      }
     }
     ctx.restore()
   }
@@ -170,17 +173,25 @@ export class ComponentField extends Component {
     this.currentMinoRot = current
   }
 
-  setCurrentMinoToBackground() {
-    const currentMinoCoords = Tetris.getRotatedCoords(Tetris.minoList[this.currentMino.id], this.currentMinoRot)
+  setMino(minoId, blocks, pos, rot, field) {
+    const currentMinoCoords = Tetris.getRotatedCoords(Tetris.minoList[minoId], rot)
     for (let i = 0; i < 4; i++) {
-      const [ox, oy] = this.currentMinoPos
+      const [ox, oy] = pos
       const [dx, dy] = currentMinoCoords[i]
       const x = ox + dx
       const y = oy + dy
       if (x < 0 || x >= 10 || y < 0 || y >= 20) continue
-      const block = this.currentMino.blocks[i]
-      this.backgroundField[y][x] = block
+      field[y][x] = blocks[i]
     }
   }
+
+  setNewCurrentMino(fieldMino) {
+    this.currentMino = fieldMino.mino
+    this.currentMinoPos = fieldMino.pos
+    this.currentMinoRot = fieldMino.rot
+  }
+
+  setCurrentMinoToBackground() { this.setMino(this.currentMino.id, this.currentMino.blocks, this.currentMinoPos, this.currentMinoRot, this.backgroundField) }
+  setCurrentMinoToForeground() { this.setMino(this.currentMino.id, this.currentMino.blocks, this.currentMinoPos, this.currentMinoRot, this.foregroundField) }
 }
 

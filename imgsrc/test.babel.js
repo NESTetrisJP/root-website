@@ -83,12 +83,12 @@ export default [
         if (i > 0) {
           if (das >= 15) {
             das = 10
-            field.moveMino([-1, 0])
+            field.moveMino([1, 0])
           }
           else das++
         }
         field.setCurrentMinoToBackground()
-        if (drop === 2) {
+        if (drop === 1) {
           drop = 0
           field.moveMino([0, -1])
         }
