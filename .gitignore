@@ -8,6 +8,6 @@ public/
 
 build/
 .idea/
-source/images/apng/
+source/images/apng/*.png
 imgsrc/*.png
 imgsrc/*.gif

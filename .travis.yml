@@ -20,7 +20,7 @@ script:
 
 deploy:
   provider: pages
-  repo: nestetrisjp.github.io
+  repo: NESTetrisJP/nestetrisjp.github.io
   target_branch: master
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
