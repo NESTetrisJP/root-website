@@ -5,6 +5,8 @@ category:
 - [DAS]
 tags:
 - DAS
+- 横タメの振り替え
+- ビタ止め
 ---
 
 

@@ -5,6 +5,8 @@ category:
 - [DAS]
 tags:
 - DAS
+- 壁チャージ
+- 横の長押し
 ---
 
 
