@@ -1,5 +1,5 @@
 import { ComponentField, FieldBackgroundGrid } from "./tetris.babel.js"
-import NESSet, { FieldBorderNES, Controller, ComponentControllerNES, FieldControllerNES, ComponentDAS, RotationSystemNES } from "./nes-set.babel.js"
+import NESSet, { FieldBorderNES, Controller, ComponentControllerNES, FieldControllerNES, ComponentDAS, RotationSystemNES, BlockNES } from "./nes-set.babel.js"
 import { ContainerVerticalAlign } from "./containers.babel.js"
 
 export default class Template {
@@ -25,5 +25,14 @@ export default class Template {
   update() {
     this.controller.update()
     this.fieldController.update()
+  }
+
+  setField(array) {
+    for (let iy = 0; iy < array.length; iy++) {
+      for (let ix = 0; ix < 10; ix++) {
+        const id = array[array.length - iy - 1][ix]
+        if (id != -1) this.field.foregroundField[iy][ix] = new BlockNES(id, null)
+      }
+    }
   }
 }

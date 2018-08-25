@@ -90,6 +90,8 @@ export class ComponentField extends Component {
     this.currentMinoRot = null
     this.rotationSystem = rotationSystem
     this.backgroundFieldBrightness = 0.5
+    this.foregroundFieldBrightness = 1.0
+    this.minoBrightness = 1.3
   }
   async init() {
 
@@ -105,7 +107,7 @@ export class ComponentField extends Component {
     this.background.render(ctx)
 
     this.renderField(ctx, this.backgroundField, this.backgroundFieldBrightness)
-    this.renderField(ctx, this.foregroundField, 1)
+    this.renderField(ctx, this.foregroundField, this.foregroundFieldBrightness)
 
     if (this.currentMino != null) {
       const currentMinoCoords = Tetris.getRotatedCoords(Tetris.minoList[this.currentMino.id], this.currentMinoRot)
@@ -119,6 +121,7 @@ export class ComponentField extends Component {
         ctx.save()
         ctx.translate(x * 12, (19 - y) * 12)
         block.render(ctx)
+        this.renderBrightness(ctx, this.minoBrightness)
         ctx.restore()
       }
     }
@@ -126,18 +129,28 @@ export class ComponentField extends Component {
   }
 
   renderField(ctx, field, brightness) {
-    const b = Math.floor(brightness * 255)
     for (let iy = 0; iy < 20; iy++) {
       for (let ix = 0; ix < 10; ix++) {
         if (!field[iy][ix]) continue
         ctx.save()
         ctx.translate(ix * 12, (19 - iy) * 12)
         field[iy][ix].render(ctx)
-        ctx.fillStyle = `rgba(${b}, ${b}, ${b}, 1)`
-        ctx.globalCompositeOperation = "multiply"
-        ctx.fillRect(0, 0, 12, 12)
+        this.renderBrightness(ctx, brightness)
         ctx.restore()
       }
+    }
+  }
+
+  renderBrightness(ctx, brightness) {
+    const b = Math.floor(brightness * 255)
+    if (b < 255) {
+      ctx.fillStyle = `rgba(${b}, ${b}, ${b}, 1)`
+      ctx.globalCompositeOperation = "multiply"
+      ctx.fillRect(0, 0, 12, 12)
+    } else if (b > 255) {
+      ctx.fillStyle = `rgba(${b-255}, ${b-255}, ${b-255}, 1)`
+      ctx.globalCompositeOperation = "screen"
+      ctx.fillRect(0, 0, 12, 12)
     }
   }
 
