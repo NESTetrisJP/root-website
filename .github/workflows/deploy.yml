@@ -30,6 +30,6 @@ jobs:
       with:
         repo: NESTetrisJP/staging-website
         keep_history: true
+        build_dir: public/
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
-        build_dir: public/
