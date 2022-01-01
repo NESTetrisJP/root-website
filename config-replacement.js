@@ -1,0 +1,5 @@
+const fs = require("fs")
+let config = fs.readFileSync("_config.yml", { encoding: "utf8" })
+config = config.replace(/^url: https:\/\/nestetrisjp\.github\.io$/m, "url: https://nestetrisjp.github.io/staging-website")
+config = config.replace(/^root: \/$/m, "root: /staging-website/")
+fs.writeFileSync("_config.yml", config, { encoding: "utf8" })

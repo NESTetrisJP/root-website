@@ -17,16 +17,7 @@ jobs:
       with:
         node-version: 14.x
         cache: 'yarn'
-    - uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "^url: https://nestetrisjp\\.github\\.io$"
-        replace: "url: https://nestetrisjp.github.io/staging-website"
-        include: "_config.yml"
-    - uses: jacobtomlinson/gha-find-replace@v2
-      with:
-        find: "^root: /$"
-        replace: "root: /staging-website/"
-        include: "_config.yml"
+    - run: node ./config-replacement.js
     - run: yarn install
     - run: yarn run apng
     - run: yarn run build
