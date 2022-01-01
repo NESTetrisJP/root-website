@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: FedericoCarboni/setup-ffmpeg@v1
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: 'yarn'
+    - run: yarn install
+    - run: yarn run apng
+    - run: yarn run build
+    - name: GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v2.5.0
+      with:
+        repo: NESTetrisJP/nestetrisjp.github.io
+        keep_history: true
+        build_dir: public/
+        target_branch: master
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
