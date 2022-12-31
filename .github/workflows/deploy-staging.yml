@@ -15,12 +15,11 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        node-version: 14.x
-        cache: 'yarn'
+        node-version: 16
     - run: node ./.github/workflows/staging-config-replacement.js
-    - run: yarn install
-    - run: yarn run apng
-    - run: yarn run build
+    - run: npm install
+    - run: npm run apng
+    - run: npm run build
     - name: GitHub Pages
       uses: crazy-max/ghaction-github-pages@v2.5.0
       with:
