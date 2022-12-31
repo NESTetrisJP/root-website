@@ -1,0 +1,11 @@
+.article-entry .apng-controller-container .apng-controller-canvas {
+  height: 100%;
+  display: block;
+  margin: auto;
+}
+.article-entry .apng-controller-container .apng-controller-controller {
+  width: 180px;
+  height: 100%;
+  display: block;
+  margin: auto;
+}

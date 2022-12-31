@@ -33,12 +33,13 @@ DAS (Delayed Auto Shift) にはいくつかの意味が存在し、文脈によ�
 
 | ゲーム                       | DAS            | ARR           | サンプル                                   |
 |:----------------------------:|:--------------:|:-------------:|:------------------------------------------:|
-| テトリスオンライン (横移動4) | 110 ms (≒7 f) | 55 ms (≒3 f) | {% apng das-comparison-toj.png %} |
-| ぷよぷよテトリス             | 11 f           | 2 f           | {% apng das-comparison-ppt.png %} |
-| TGM (初代)                   | 14 f           | 1 f           | {% apng das-comparison-tgm.png %} |
-| NESテトリス                  | 16 f           | 6 f           | {% apng das-comparison-nes.png %} |
-| GBテトリス                   | 24 f           | 9 f           | {% apng das-comparison-gb.png %}  |
+| テトリスオンライン (横移動4) | 110 ms (≒7 f) | 55 ms (≒3 f) | {% apng das-comparison-toj.png das-comparison %} |
+| ぷよぷよテトリス             | 11 f           | 2 f           | {% apng das-comparison-ppt.png das-comparison %} |
+| TGM (初代)                   | 14 f           | 1 f           | {% apng das-comparison-tgm.png das-comparison %} |
+| NESテトリス                  | 16 f           | 6 f           | {% apng das-comparison-nes.png das-comparison %} |
+| GBテトリス                   | 24 f           | 9 f           | {% apng das-comparison-gb.png das-comparison %}  |
 
+{% apng_group_controller das-comparison %}
 
 ## NESテトリスにおけるDAS
 

@@ -7,7 +7,7 @@ banner: "images/banner.jpg"
 
 # Content
 excerpt_link: Read More
-fancybox: true
+fancybox: false
 
 # # Footer
 # copyright: |-
