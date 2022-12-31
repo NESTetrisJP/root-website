@@ -32,6 +32,9 @@
   <% if (config.highlight.enable){ %>
     <%- css('https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css') %>
   <% } %>
+  <% if (config.noindex) { %>
+    <meta name="robots" content="noindex">
+  <% } %>
   <%- css('css/style') %>
   <% if (theme.fancybox){ %>
     <%- css('fancybox/jquery.fancybox.min.css') %>
