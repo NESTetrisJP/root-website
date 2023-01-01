@@ -6,3 +6,6 @@
   display: block;
   margin: auto;
 }
+.article-entry .apng-controller-container-standalone + .apng-controller-container-standalone {
+  margin-top: 8px;
+}

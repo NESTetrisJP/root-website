@@ -27,16 +27,19 @@ export class ContainerVerticalAlign extends Component {
   constructor() {
     super()
     this.components = []
+    this.margin = 0
     this.size = [0, 0]
   }
   getSize() { return this.size }
   recalcSize() {
     let width = 0
     let height = 0
-    this.components.forEach(e => {
+    this.components.forEach((e, i) => {
       if (e.size[0] > width) width = e.size[0]
       height += e.size[1]
+      height += this.margin
     })
+    if (this.components.length > 0) height -= this.margin
     this.size = [width, height]
   }
   addComponent(component, align) {
@@ -47,6 +50,10 @@ export class ContainerVerticalAlign extends Component {
     })
     this.recalcSize()
   }
+  setMargin(margin) {
+    this.margin = margin
+    this.recalcSize()
+  }
   render(ctx) {
     let y = 0
     this.components.forEach(e => {
@@ -55,6 +62,7 @@ export class ContainerVerticalAlign extends Component {
       ctx.translate(x, y)
       e.component.render(ctx)
       y += e.size[1]
+      y += this.margin
       ctx.restore()
     })
   }

@@ -240,40 +240,64 @@ export class ComponentControllerNES {
     this.controller = controller
   }
 
-  getSize() { return [88, 36] }
+  getSize() { return [104, 56] }
 
   render(ctx) {
-    ctx.save()
-    ctx.translate(0, 12)
-    this.renderDirection(ctx, "left")
-    ctx.translate(12, -12)
-    this.renderDirection(ctx, "up")
-    ctx.translate(0, 24)
-    this.renderDirection(ctx, "down")
-    ctx.translate(12, -12)
-    this.renderDirection(ctx, "right")
+    // background
+    ctx.fillStyle = "#CCC"
+    ctx.fillRect(0, 0, 104, 56)
+    ctx.fillStyle = "#222"
+    ctx.fillRect(4, 8, 96, 44)
 
-    ctx.translate(32, 12)
-    this.renderButton(ctx, "b")
-    ctx.translate(24, 0)
-    this.renderButton(ctx, "a")
-    ctx.restore()
-  }
+    // button border
+    ctx.fillStyle = "#CCC"
+    // d-pad
+    ctx.fillRect(8, 22, 36, 16)
+    ctx.fillRect(18, 12, 16, 36)
+    // b
+    ctx.fillRect(52, 28, 20, 20)
+    // a
+    ctx.fillRect(76, 28, 20, 20)
 
-  renderDirection(ctx, button) {
-    const pressed = this.controller.pressed(button)
-    ctx.fillStyle = pressed ? "#444" : "#CCC"
-    ctx.fillRect(0, 0, 12, 12)
-    ctx.strokeRect(0, 0, 12, 12)
-  }
+    // button background
+    // d-pad
+    ctx.fillStyle = "#222"
+    ctx.fillRect(10, 24, 32, 12)
+    ctx.fillRect(20, 14, 12, 32)
 
-  renderButton(ctx, button) {
-    const pressed = this.controller.pressed(button)
-    ctx.fillStyle = pressed ? "#444" : "#CCC"
+    ctx.fillStyle = "#800"
+    // b
     ctx.beginPath()
-    ctx.arc(0, 0, 8, 0, Math.PI * 2, false)
+    ctx.arc(62, 38, 8, 0, Math.PI * 2, false)
     ctx.fill()
-    ctx.stroke()
+    // a
+    ctx.beginPath()
+    ctx.arc(86, 38, 8, 0, Math.PI * 2, false)
+    ctx.fill()
+
+    ctx.fillStyle = "#fff"
+    if (this.controller.pressed("left")) {
+      ctx.fillRect(10, 24, 8, 12)
+    }
+    if (this.controller.pressed("right")) {
+      ctx.fillRect(34, 24, 8, 12)
+    }
+    if (this.controller.pressed("up")) {
+      ctx.fillRect(20, 14, 12, 8)
+    }
+    if (this.controller.pressed("down")) {
+      ctx.fillRect(20, 38, 12, 8)
+    }
+    if (this.controller.pressed("b")) {
+      ctx.beginPath()
+      ctx.arc(62, 38, 8, 0, Math.PI * 2, false)
+      ctx.fill()
+    }
+    if (this.controller.pressed("a")) {
+      ctx.beginPath()
+      ctx.arc(86, 38, 8, 0, Math.PI * 2, false)
+      ctx.fill()
+    }
   }
 }
 
@@ -293,5 +317,14 @@ export class ComponentDAS {
     ctx.fillRect(this.width * 14 / 16, 0, this.width * 2 / 16, 12)
     ctx.fillStyle = das < 10 ? "#FF2800" : das < 15 ? "#FAF500" : "#35A16B"
     ctx.fillRect(0, 0, this.width * das / 16, 12)
+
+    ctx.font = "bold 12px sans-serif"
+    ctx.textAlign = "left"
+    ctx.textBaseline = "middle"
+    ctx.lineWidth = 3
+    ctx.strokeStyle = das < 10 ? "#7F1400" : das < 15 ? "#7D7A00" : "#1A5035"
+    ctx.strokeText(String(das), 0, 6)
+    ctx.fillStyle = "#FFF"
+    ctx.fillText(String(das), 0, 6)
   }
 }

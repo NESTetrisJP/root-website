@@ -15,6 +15,7 @@ export default class Template {
     this.container.addComponent(this.field, 0)
     this.container.addComponent(this.controllerComponent, 0)
     this.container.addComponent(this.dasComponent, 0)
+    this.container.setMargin(4)
   }
 
   async init() {
