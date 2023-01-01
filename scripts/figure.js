@@ -11,4 +11,6 @@ hexo.extend.tag.register("apng_group_controller", function (args) {
 }, false)
 
 hexo.extend.injector.register("body_end", `<script type="module">import { ApngController } from "${hexo.config.root}apng_controller/apng_controller.min.mjs";ApngController.initialize().transformAll()</script>`)
+hexo.extend.injector.register("head_end", `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />`)
+hexo.extend.injector.register("head_end", `<link rel="stylesheet" href="${hexo.config.root}apng_controller/apng_controller.min.css" />`)
 hexo.extend.injector.register("head_end", `<link rel="stylesheet" href="${hexo.config.root}apng_controller/additional_styles.css">`)
