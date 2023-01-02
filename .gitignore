@@ -17,5 +17,5 @@ public/
 build/
 .idea/
 source/images/apng/*.png
-imgsrc/*.png
-imgsrc/*.gif
+apng/*.png
+apng/*.gif

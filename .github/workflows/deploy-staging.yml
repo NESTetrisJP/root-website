@@ -16,7 +16,7 @@ jobs:
         node-version: 16
     - run: node ./.github/workflows/staging-config-replacement.js
     - run: npm install
-    - run: npm run apng
+    - run: npm run build-apng
     - run: npm run build
     - uses: crazy-max/ghaction-github-pages@v3
       with:
