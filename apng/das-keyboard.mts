@@ -1,5 +1,5 @@
-import { Component } from "animationis"
-import NESSet, { BlockNES } from "./include/nes-set.mjs"
+import { Component, Stage } from "animationis"
+import { NesBlockRenderer, NesResources } from "./include/tetris-component-nes.mjs"
 
 class ComponentDAS extends Component {
   private f = 0
@@ -32,16 +32,16 @@ class ComponentDAS extends Component {
     ctx.textAlign = "left"
     ctx.font = "15px Sans"
     ctx.fillText("".padStart(this.i, "a"), 32, 3)
-    const b = new BlockNES(0, 0)
+    const blockRenderer = new NesBlockRenderer()
     ctx.save()
     ctx.translate(32 + 12 * this.i, 32)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.translate(12, 0)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.translate(-12, 12)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.translate(12, 0)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.restore()
     this.f++
   }
@@ -54,10 +54,10 @@ export default [
     fps: 30,
     component: component,
     init: async function() {
-      await NESSet.init()
+      await NesResources.init()
     },
     run: function* () {
       for (let i = 0; i < 60; i++) yield;
     }
   }
-]
+] as Stage[]

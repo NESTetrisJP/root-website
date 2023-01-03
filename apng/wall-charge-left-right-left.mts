@@ -1,4 +1,4 @@
-import { concurrentGenerator } from "animationis"
+import { concurrentGenerator, Stage } from "animationis"
 import Template from "./include/template.mjs"
 
 export default [
@@ -7,7 +7,7 @@ export default [
   createCase("too-late", 15),
 ]
 
-function createCase (name: string, waitFrame: number) {
+function createCase (name: string, waitFrame: number): Stage {
   const t = new Template()
   const c = t.controller
   return {
@@ -29,11 +29,11 @@ function createCase (name: string, waitFrame: number) {
         [-1,  0,  0,  0,  0,  2,  1,  2,  2,  1],
         [-1,  0,  0,  0,  0,  0,  0,  1,  1,  1]
       ])
-      t.fieldController.appendMino(3)
-      t.fieldController.appendMino(0)
-      t.fieldController.setLevelAndUpdateSpeed(19)
-      t.fieldController.das = 16
-      t.fieldController.spawnTimer = 16
+      t.gameController.appendPiece(3)
+      t.gameController.appendPiece(0)
+      t.gameController.setLevelAndUpdateSpeed(19)
+      t.gameController.das = 16
+      t.gameController.spawnTimer = 16
       for (let i = 0; i < 8; i++) yield
       c.press("left")
       for (let i = 0; i < 18; i++) yield

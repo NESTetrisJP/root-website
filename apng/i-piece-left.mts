@@ -1,13 +1,11 @@
-import { concurrentGenerator } from "animationis"
+import { concurrentGenerator, Stage } from "animationis"
 import Template from "./include/template.mjs"
-import { generateFieldMino, BlockNES } from "./include/nes-set.mjs";
-
 
 export default [
   createChargeComparison("partially-charge", 10, 5),
   createChargeComparison("full-charge", 16, 6)
 ]
-function createChargeComparison(name, initialDas, height) {
+function createChargeComparison(name: string, initialDas: number, height: number): Stage {
   const t = new Template()
   const c = t.controller
   return {
@@ -18,11 +16,11 @@ function createChargeComparison(name, initialDas, height) {
       await t.init()
     },
     run: concurrentGenerator([function* () {
-      for (let iy = 0; iy < height; iy++) t.field.foregroundField[iy][1] = new BlockNES(1, null)
-      t.fieldController.spawnTimer = 16
-      t.fieldController.appendMino(0)
-      t.fieldController.setLevelAndUpdateSpeed(19)
-      t.fieldController.das = initialDas
+      for (let iy = 0; iy < height; iy++) t.game.foregroundField.set(1, iy, 1)
+      t.gameController.spawnTimer = 16
+      t.gameController.appendPiece(0)
+      t.gameController.setLevelAndUpdateSpeed(19)
+      t.gameController.das = initialDas
       for (let i = 0; i < 10; i++) yield
       c.press("left")
       for (let i = 0; i < 11; i++) yield

@@ -1,11 +1,11 @@
-import { concurrentGenerator } from "animationis"
+import { concurrentGenerator, Stage } from "animationis"
 import Template from "./include/template.mjs"
 
 export default [
   createChargeComparison("no-charge", 0),
   createChargeComparison("full-charge", 16)
 ]
-function createChargeComparison(name: string, initialDas: number) {
+function createChargeComparison(name: string, initialDas: number): Stage {
   const t = new Template()
   const c = t.controller
   return {
@@ -16,9 +16,9 @@ function createChargeComparison(name: string, initialDas: number) {
       await t.init()
     },
     run: concurrentGenerator([function* () {
-      t.fieldController.appendMino(0)
-      t.fieldController.setLevelAndUpdateSpeed(19)
-      t.fieldController.das = initialDas
+      t.gameController.appendPiece(0)
+      t.gameController.setLevelAndUpdateSpeed(19)
+      t.gameController.das = initialDas
       c.press("left")
       for (let i = 0; i < 5; i++) yield
       c.press("a")

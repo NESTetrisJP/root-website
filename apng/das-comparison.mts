@@ -1,5 +1,5 @@
-import { Component } from "animationis"
-import NESSet, { BlockNES } from "./include/nes-set.mjs"
+import { Component, Stage } from "animationis"
+import { NesBlockRenderer, NesResources } from "./include/tetris-component-nes.mjs"
 
 class ComponentDAS extends Component {
   private f = -20
@@ -12,16 +12,16 @@ class ComponentDAS extends Component {
     if (this.f == 0) this.i++
     if (this.f == this.a) this.i++
     if (this.a < this.f && this.i < 8 && ((this.f - this.a) % this.b) == 0) this.i++
-    const b = new BlockNES(0, 0)
+    const blockRenderer = new NesBlockRenderer()
     ctx.save()
     ctx.translate(12 * this.i, 0)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.translate(12, 0)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.translate(-12, 12)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.translate(12, 0)
-    b.render(ctx)
+    blockRenderer.render(ctx, 0)
     ctx.restore()
     this.f++
   }
@@ -41,10 +41,10 @@ export default platforms.map(e => {
     fps: 60,
     component: new ComponentDAS(e.a, e.b),
     init: async function() {
-      await NESSet.init()
+      await NesResources.init()
     },
     run: function* () {
       for (let i = 0; i < 100; i++) yield;
     }
-  }
+  } as Stage
 })

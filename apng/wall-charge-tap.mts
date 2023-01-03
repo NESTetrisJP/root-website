@@ -1,6 +1,6 @@
-import { concurrentGenerator } from "animationis"
+import { concurrentGenerator, Stage } from "animationis"
 import Template from "./include/template.mjs"
-import { generateFieldMino } from "./include/nes-set.mjs";
+import { generateNesFieldPiece } from "./include/tetris-game-nes.mjs";
 
 const t = new Template()
 const c = t.controller
@@ -12,12 +12,10 @@ export default {
     await t.init()
   },
   run: concurrentGenerator([function* () {
-    t.fieldController.appendMino(3)
-    const fieldMino = generateFieldMino(3)
-    t.field.currentMino = fieldMino.mino
-    t.field.currentMinoPos = [8, fieldMino.pos[1]]
-    t.field.currentMinoRot = fieldMino.rot
-    t.fieldController.das = 16
+    t.gameController.appendPiece(3)
+    const fieldPiece = generateNesFieldPiece(3)
+    t.game.setCurrentPiece({ ...fieldPiece, position: [8, fieldPiece.position[1]] })
+    t.gameController.das = 16
     yield
     for (let j = 0; j < 9; j++) {
       c.press("left")
@@ -40,4 +38,4 @@ export default {
       yield
     }
   }])
-}
+} as Stage

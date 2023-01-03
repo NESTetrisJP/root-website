@@ -1,4 +1,4 @@
-import { concurrentGenerator } from "animationis"
+import { concurrentGenerator, Stage } from "animationis"
 import Template from "./include/template.mjs"
 
 const t = new Template()
@@ -22,11 +22,11 @@ export default {
       [0,  0,  1,  0,  0,  1,  1,  1,  2, -1],
       [1,  1,  1,  1,  0,  0,  0,  2,  2, -1]
     ])
-    t.fieldController.appendMino(2)
-    t.fieldController.appendMino(3)
-    t.fieldController.setLevelAndUpdateSpeed(19)
-    t.fieldController.das = 16
-    t.fieldController.spawnTimer = 16
+    t.gameController.appendPiece(2)
+    t.gameController.appendPiece(3)
+    t.gameController.setLevelAndUpdateSpeed(19)
+    t.gameController.das = 16
+    t.gameController.spawnTimer = 16
     for (let i = 0; i < 18; i++) yield
     c.press("left")
     for (let i = 0; i < 2; i++) yield
@@ -49,4 +49,4 @@ export default {
       yield
     }
   }])
-}
+} as Stage

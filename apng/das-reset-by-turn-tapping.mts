@@ -1,4 +1,4 @@
-import { concurrentGenerator } from "animationis"
+import { concurrentGenerator, Stage } from "animationis"
 import Template from "./include/template.mjs"
 
 const t = new Template()
@@ -11,8 +11,8 @@ export default {
     await t.init()
   },
   run: concurrentGenerator([function* () {
-    t.fieldController.appendMino(3)
-    t.fieldController.setLevelAndUpdateSpeed(18)
+    t.gameController.appendPiece(3)
+    t.gameController.setLevelAndUpdateSpeed(18)
     for (let i = 0; i < 5; i++) yield
     c.press("left")
     for (let i = 0; i < 40; i++) yield
@@ -28,4 +28,4 @@ export default {
       yield
     }
   }])
-}
+} as Stage

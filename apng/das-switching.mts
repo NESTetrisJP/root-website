@@ -11,9 +11,9 @@ export default {
     await t.init()
   },
   run: concurrentGenerator([function* () {
-    t.fieldController.appendMino(5)
-    t.fieldController.appendMino(0)
-    t.fieldController.setLevelAndUpdateSpeed(19)
+    t.gameController.appendPiece(5)
+    t.gameController.appendPiece(0)
+    t.gameController.setLevelAndUpdateSpeed(19)
     for (let i = 0; i < 5; i++) yield
     c.press("right")
     c.press("a")
